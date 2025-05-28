@@ -1,0 +1,11 @@
+<h1>Welcome to the Order Management System</h1>
+
+<p><a href="{% url 'place_order' %}">Place Order</a></p>
+<p><a href="{% url 'my_orders' %}">My Orders</a></p>
+<p><a href="{% url 'vendor_orders' %}">Vendor Orders</a></p>
+
+<!-- Logout form -->
+<form method="post" action="{% url 'logout' %}" style="display: inline;">
+    {% csrf_token %}
+    <button type="submit">Logout</button>
+</form>
