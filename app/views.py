@@ -7,11 +7,13 @@ from .forms import OrderForm
 def home(request):
     return render(request, 'app/home.html')
 
+from django.contrib import messages
+
 @login_required
 def place_order(request):
     if request.user.role != 'customer':
         return redirect('home')
-    
+
     if request.method == 'POST':
         form = OrderForm(request.POST)
         if form.is_valid():
@@ -21,11 +23,13 @@ def place_order(request):
             order = Order.objects.create(customer=request.user)
             OrderItem.objects.create(order=order, product=product, quantity=quantity)
 
+            messages.success(request, "Order placed successfully!")
             return redirect('my_orders')
     else:
         form = OrderForm()
 
     return render(request, 'app/place_order.html', {'form': form})
+
 
 @login_required
 def my_orders(request):

@@ -1,9 +1,13 @@
 from django import forms
 from .models import OrderItem, Product
 
+from django import forms
+from .models import Product
+
 class OrderForm(forms.Form):
-    product = forms.ModelChoiceField(queryset=Product.objects.all())
-    quantity = forms.IntegerField(min_value=1)
+    product = forms.ModelChoiceField(queryset=Product.objects.all(), label="Select Product")
+    quantity = forms.IntegerField(min_value=1, label="Quantity")
+
 
 
 from django import forms

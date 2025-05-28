@@ -1,6 +1,28 @@
 <h2>Place an Order</h2>
+
 <form method="post">
     {% csrf_token %}
-    {{ form.as_p }}
+    {{ form.non_field_errors }}
+    
+    <div>
+        {{ form.product.label_tag }}
+        {{ form.product }}
+        {{ form.product.errors }}
+    </div>
+    
+    <div>
+        {{ form.quantity.label_tag }}
+        {{ form.quantity }}
+        {{ form.quantity.errors }}
+    </div>
+
     <button type="submit">Order</button>
 </form>
+
+{% if messages %}
+    <ul>
+        {% for message in messages %}
+            <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
